@@ -15,5 +15,5 @@ php artisan key:generate
 if [ "$1" = "--migrate" ]; then
   php artisan migrate:fresh --seed
 fi
-
+ 
 php-fpm
