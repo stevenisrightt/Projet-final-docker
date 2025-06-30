@@ -3,8 +3,7 @@ services:
     build:
       context: ./php
     volumes:
-      - ./app/TP-Final-3IW-ESGI-main:/var/www/html
-      - ./app/TP-Final-3IW-ESGI-main/.env:/var/www/html/.env
+      - ./app/TP-Final-3IW-ESGI-main1:/var/www/html
     working_dir: /var/www/html
     command: sh -c "/start.sh --migrate"
 
@@ -12,10 +11,10 @@ services:
     build:
       context: ./php
     volumes:
-      - ./app/TP-Final-3IW-ESGI-main:/var/www/html
-      - ./app/TP-Final-3IW-ESGI-main/.env:/var/www/html/.env
+      - ./app/TP-Final-3IW-ESGI-main2:/var/www/html
     working_dir: /var/www/html
     command: sh -c "/start.sh"
+    
   nginx1:
     image: nginx:latest
     container_name: nginx1
@@ -23,7 +22,7 @@ services:
       - "8081:80"
     volumes:
       - ./nginx/ConfigNGINX1.conf:/etc/nginx/conf.d/nginx.conf
-      - ./app/TP-Final-3IW-ESGI-main:/var/www/html
+      - ./app/TP-Final-3IW-ESGI-main1:/var/www/html
       - /dev/null:/etc/nginx/conf.d/default.conf
     depends_on:
       - php1
@@ -36,7 +35,7 @@ services:
       - "8082:80"
     volumes:
       - ./nginx/ConfigNGINX2.conf:/etc/nginx/conf.d/nginx.conf
-      - ./app/TP-Final-3IW-ESGI-main:/var/www/html
+      - ./app/TP-Final-3IW-ESGI-main2:/var/www/html
       - /dev/null:/etc/nginx/conf.d/default.conf
     depends_on:
       - php2
@@ -58,3 +57,4 @@ services:
 
 volumes:
   mysql_data:
+    name: mysql_data
